@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from .models import Post
 # Create your views here.
 
 
@@ -12,4 +12,8 @@ def welcome_page(request):
 
 
 def blog_list_view(request):
-    return render(request , 'blog/blog_list.html')
+    post_list = Post.objects.all()
+    context = {
+        "post_list":post_list
+            }
+    return render(request , 'blog/blog_list.html' , context=context)
