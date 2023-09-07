@@ -27,3 +27,10 @@ def blog_detail_view(request , pk):
         "post":post_list
     }
     return render(request , 'blog/blog_detail.html' , context=context)
+
+
+
+def blog_new_view(request):
+
+
+    return render(request, 'blog/blog_new.html' , )
