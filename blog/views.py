@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 from .models import Post
+from .forms import NewPostForm
+
 # Create your views here.
 
 
@@ -12,7 +14,7 @@ def welcome_page(request):
 
 
 def blog_list_view(request):
-    post_list = Post.objects.all()
+    post_list = Post.objects.filter(status ="pub")
     context = {
         "post_list":post_list
             }
@@ -31,6 +33,24 @@ def blog_detail_view(request , pk):
 
 
 def blog_new_view(request):
+    if request.method == "POST":
+        form = NewPostForm(request.POST)
+        if form.is_valid():
+            form.save()
+            form = NewPostForm()
+            return redirect("blog_list")
+
+    else :
+     form = NewPostForm()
+     
+    return render(request, 'blog/blog_new.html' ,context={"form":form} )
 
 
-    return render(request, 'blog/blog_new.html' , )
+
+def blog_edit_view(request ):    
+    
+     
+    
+
+    return render(request , "blog/blog_new.html",)
+    

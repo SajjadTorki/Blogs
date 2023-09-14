@@ -12,7 +12,7 @@ class Post(models.Model):
     text = models.TextField()
     author = models.ForeignKey('auth.user' , on_delete=models.CASCADE)
     date_time_modified = models.DateTimeField(auto_now_add=True)
-    date_time_changed = models.DateTimeField(auto_now=False)
+    date_time_changed = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=50 , choices=STATUS_CHIOCES)
 
     def __str__(self):
