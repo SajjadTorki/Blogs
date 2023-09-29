@@ -13,26 +13,30 @@ def welcome_page(request):
 
 
 
-def blog_list_view(request):
-    post_list = Post.objects.filter(status ="pub").order_by('-date_time_changed')
-    context = {
-        "post_list":post_list
-            }
-    return render(request , 'blog/blog_list.html' , context=context)
+# def blog_list_view(request):
+#     post_list = Post.objects.filter(status ="pub").order_by('-date_time_changed')
+#     context = {
+#         "post_list":post_list
+#             }
+#     return render(request , 'blog/blog_list.html' , context=context)
 
 class BlogListView(generic.ListView):
     model = Post
     template_name= 'blog/blog_list.html'
     context_object_name = 'post_list'
 
-def blog_detail_view(request , pk):
+# def blog_detail_view(request , pk):
 
-    post_list = Post.objects.get(pk=pk)
-    context ={
-        "post":post_list
-    }
-    return render(request , 'blog/blog_detail.html' , context=context)
+#     post_list = Post.objects.get(pk=pk)
+#     context ={
+#         "post":post_list
+#     }
+#     return render(request , 'blog/blog_detail.html' , context=context)
 
+class BlogDetailView(generic.DetailView):
+    model = Post
+    template_name = 'blog/blog_detail.html'
+    context_object_name="post"
 
 
 def blog_new_view(request):
