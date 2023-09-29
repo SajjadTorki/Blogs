@@ -1,7 +1,7 @@
 from django.shortcuts import render , redirect , get_object_or_404
 from .models import Post
 from .forms import NewPostForm
-
+from django.views import generic
 # Create your views here.
 
 
@@ -20,7 +20,10 @@ def blog_list_view(request):
             }
     return render(request , 'blog/blog_list.html' , context=context)
 
-
+class BlogListView(generic.ListView):
+    model = Post
+    template_name= 'blog/blog_list.html'
+    context_object_name = 'post_list'
 
 def blog_detail_view(request , pk):
 
